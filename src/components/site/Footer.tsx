@@ -28,7 +28,7 @@ export function Footer() {
               { label: "Sustainability", to: "/sustainability" },
               { label: "Newsroom", to: "/about" },
             ]} />
-            <FooterCol title="Brands" links={BRANDS.map(b => ({ label: b.name, to: `/brands/${b.slug}` }))} />
+            <FooterCol title="Brands" links={BRANDS.slice(0, 8).map(b => ({ label: b.name, to: `/brands/${b.slug}` })).concat([{ label: "See all →", to: "/brands" }])} />
             <FooterCol title="For partners" links={[
               { label: "Distributors", to: "/contact" },
               { label: "Retailers", to: "/contact" },
