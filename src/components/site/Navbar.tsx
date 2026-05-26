@@ -107,12 +107,15 @@ export function Navbar() {
                     onClick={() => setMegaOpen(false)}
                     className="group relative overflow-hidden rounded-lg border border-black/5 bg-bone p-4 transition-all hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className="aspect-[4/3] overflow-hidden rounded">
+                    <div
+                      className="aspect-[4/3] overflow-hidden rounded grid place-items-center"
+                      style={{ background: `linear-gradient(135deg, ${b.accent}55, ${b.accent}10)` }}
+                    >
                       <img
-                        src={b.image}
+                        src={b.heroImage}
                         alt={b.name}
                         loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="h-full w-full object-cover opacity-30 mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                     <div className="mt-3 flex items-baseline justify-between">
