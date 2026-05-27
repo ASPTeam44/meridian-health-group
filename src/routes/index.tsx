@@ -12,8 +12,8 @@ import lab from "@/assets/lab-research.jpg";
 export const Route = createFileRoute("/")({ component: Home });
 
 const STATS = [
-  { k: "38", v: "markets worldwide" },
-  { k: "20", v: "trusted brands" },
+  { k: "85+", v: "markets worldwide" },
+  { k: "16", v: "trusted brands" },
   { k: "6", v: "health categories" },
   { k: "1.2B", v: "products shipped yearly" },
 ];
@@ -66,7 +66,7 @@ function Home() {
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
               <p className="font-display text-4xl leading-[1.1] text-balance md:text-6xl lg:text-7xl">
-                Twenty brands. Six categories. One belief — that everyday health should be <span className="text-lime-dim">accessible, evidence-led and beautifully made.</span>
+                Sixteen brands. Six categories. One belief — that everyday health should be <span className="text-lime-dim">accessible, evidence-led and beautifully made.</span>
               </p>
               <div className="mt-12 grid gap-8 md:grid-cols-2">
                 <p className="text-pretty text-base text-muted-foreground md:text-lg">

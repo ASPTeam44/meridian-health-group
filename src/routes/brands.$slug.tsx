@@ -195,19 +195,20 @@ function ProductCard({
         style={{ background: `linear-gradient(135deg, ${brand.accent}55, ${brand.accent}11)` }}
       >
         <img
-          src={brand.heroImage}
+          src={brand.productImage}
           alt={product.name}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-multiply transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
         />
-        <div className="relative z-10 text-center">
-          <p className="font-display text-6xl tracking-tight text-ink/90" style={{ textShadow: "0 2px 0 rgba(255,255,255,0.4)" }}>
-            {brand.monogram}
-          </p>
-          <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-ink/60">{product.size}</p>
-        </div>
-        <span className="absolute left-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] backdrop-blur">
+        <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full bg-white/85 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] backdrop-blur">
           {product.sku}
+        </span>
+        <span
+          className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-ink"
+          style={{ background: brand.accent }}
+        >
+          {brand.name}
         </span>
       </div>
 
