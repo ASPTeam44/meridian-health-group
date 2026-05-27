@@ -21,7 +21,8 @@ export function InquiryDialog({ open, onClose, brand, product, quantity }: Props
   const [sent, setSent] = useState(false);
   const [payment, setPayment] = useState<(typeof PAYMENTS)[number]["id"]>("bank");
 
-  const total = (product.price * quantity).toFixed(2);
+  const totalUsd = (product.priceUsd * quantity).toFixed(2);
+  const totalEur = (product.priceEur * quantity).toFixed(2);
 
   return (
     <AnimatePresence>
@@ -78,8 +79,9 @@ export function InquiryDialog({ open, onClose, brand, product, quantity }: Props
                   <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
                     <span><strong>{product.name}</strong> · {product.size}</span>
                     <span>SKU: {product.sku}</span>
+                    <span>EAN: {product.ean}</span>
                     <span>Qty: <strong>{quantity}</strong></span>
-                    <span>Est. total: <strong>${total}</strong></span>
+                    <span>Est. total: <strong>${totalUsd}</strong> / <strong>€{totalEur}</strong></span>
                   </div>
                 </div>
 
