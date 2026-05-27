@@ -12,8 +12,8 @@ import lab from "@/assets/lab-research.jpg";
 export const Route = createFileRoute("/")({ component: Home });
 
 const STATS = [
-  { k: "38", v: "markets worldwide" },
-  { k: "20", v: "trusted brands" },
+  { k: "85+", v: "markets worldwide" },
+  { k: "16", v: "trusted brands" },
   { k: "6", v: "health categories" },
   { k: "1.2B", v: "products shipped yearly" },
 ];
@@ -45,7 +45,7 @@ function Home() {
         subtitle="A global family of consumer healthcare brands across oral care, vitamins, respiratory, pain relief, digestive and therapeutic skin health — built on clinical rigour, designed for real lives."
       />
 
-      {/* Stats marquee */}
+      {/* Stats */}
       <section className="border-y border-black/5 bg-bone">
         <div className="mx-auto grid max-w-[1400px] grid-cols-2 divide-x divide-black/10 px-6 lg:grid-cols-4 lg:px-10">
           {STATS.map((s, i) => (
@@ -57,6 +57,33 @@ function Home() {
         </div>
       </section>
 
+      {/* Brand marquee */}
+      <section className="bg-white py-10 lg:py-14">
+        <div className="marquee-mask overflow-hidden">
+          <div className="flex w-max animate-[marquee_38s_linear_infinite] gap-16 px-6 lg:gap-24">
+            {[...BRANDS, ...BRANDS].map((b, i) => (
+              <Link
+                key={`${b.slug}-${i}`}
+                to="/brands/$slug"
+                params={{ slug: b.slug }}
+                className="group flex shrink-0 items-center gap-3"
+              >
+                <span
+                  className="grid h-9 w-9 place-items-center rounded-full font-display text-base text-ink"
+                  style={{ background: b.accent }}
+                >
+                  {b.monogram}
+                </span>
+                <span className="font-display text-3xl tracking-tight text-ink/70 transition-colors group-hover:text-ink md:text-4xl">
+                  {b.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <style>{`@keyframes marquee { to { transform: translateX(-50%); } }`}</style>
+      </section>
+
       {/* Editorial intro */}
       <section className="bg-white py-28 lg:py-40">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
@@ -66,7 +93,7 @@ function Home() {
             </Reveal>
             <Reveal delay={0.1} className="lg:col-span-8">
               <p className="font-display text-4xl leading-[1.1] text-balance md:text-6xl lg:text-7xl">
-                Twenty brands. Six categories. One belief — that everyday health should be <span className="text-lime-dim">accessible, evidence-led and beautifully made.</span>
+                Sixteen brands. Six categories. One belief — that everyday health should be <span className="text-lime-dim">accessible, evidence-led and beautifully made.</span>
               </p>
               <div className="mt-12 grid gap-8 md:grid-cols-2">
                 <p className="text-pretty text-base text-muted-foreground md:text-lg">

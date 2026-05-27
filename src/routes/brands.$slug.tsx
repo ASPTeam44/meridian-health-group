@@ -195,30 +195,38 @@ function ProductCard({
         style={{ background: `linear-gradient(135deg, ${brand.accent}55, ${brand.accent}11)` }}
       >
         <img
-          src={brand.heroImage}
+          src={brand.productImage}
           alt={product.name}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-multiply transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
         />
-        <div className="relative z-10 text-center">
-          <p className="font-display text-6xl tracking-tight text-ink/90" style={{ textShadow: "0 2px 0 rgba(255,255,255,0.4)" }}>
-            {brand.monogram}
-          </p>
-          <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-ink/60">{product.size}</p>
-        </div>
-        <span className="absolute left-4 top-4 rounded-full bg-white/80 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] backdrop-blur">
+        <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full bg-white/85 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] backdrop-blur">
           {product.sku}
+        </span>
+        <span
+          className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-ink"
+          style={{ background: brand.accent }}
+        >
+          {brand.name}
         </span>
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{product.tagline}</p>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{brand.name} · {product.tagline}</p>
         <h3 className="mt-2 font-display text-2xl leading-tight">{product.name}</h3>
         <p className="mt-3 text-sm text-muted-foreground line-clamp-2">{product.description}</p>
 
-        <div className="mt-5 flex items-baseline justify-between">
-          <p className="font-display text-3xl">${product.price.toFixed(2)}</p>
-          <p className="text-xs text-muted-foreground">per unit</p>
+        <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          EAN <span className="text-ink/80 tabular-nums">{product.ean}</span>
+        </p>
+
+        <div className="mt-3 flex items-baseline justify-between border-t border-black/10 pt-4">
+          <div>
+            <p className="font-display text-3xl leading-none">${product.priceUsd.toFixed(2)}</p>
+            <p className="mt-1 text-sm text-muted-foreground">€{product.priceEur.toFixed(2)} · per unit</p>
+          </div>
+          <p className="text-xs text-muted-foreground">{product.size}</p>
         </div>
 
         <div className="mt-5 flex items-center gap-3">
