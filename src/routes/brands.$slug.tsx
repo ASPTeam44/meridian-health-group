@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, ChevronRight, Minus, Plus, Quote } from "lucide-react";
+import { ArrowUpRight, ChevronRight, Minus, Plus, Quote, Check, Globe2, ShieldCheck, Truck } from "lucide-react";
 import { BRANDS, getBrand, brandsByCategory, type Brand, type Product } from "@/lib/brands";
 import { Reveal } from "@/components/site/Reveal";
 import { Seo } from "@/lib/seo";
-import { InquiryDialog } from "@/components/site/InquiryDialog";
+import { useCart, MOQ_TOTAL } from "@/lib/cart";
 
 export const Route = createFileRoute("/brands/$slug")({
   component: BrandPage,
