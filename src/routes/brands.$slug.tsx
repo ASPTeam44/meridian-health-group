@@ -163,16 +163,31 @@ function BrandPage() {
   );
 }
 
-function ProductCard({
-  brand,
-  product,
-  onSubmit,
-}: {
-  brand: Brand;
-  product: Product;
-  onSubmit: (qty: number) => void;
-}) {
-  const [qty, setQty] = useState(1);
+function ProductCard({ brand, product }: { brand: Brand; product: Product }) {
+  const [qty, setQty] = useState(50);
+  const [added, setAdded] = useState(false);
+  const { addLine } = useCart();
+
+  const handleAdd = () => {
+    addLine(
+      {
+        brandSlug: brand.slug,
+        brandName: brand.name,
+        brandAccent: brand.accent,
+        categoryLabel: brand.categoryLabel,
+        sku: product.sku,
+        ean: product.ean,
+        name: product.name,
+        size: product.size,
+        image: brand.productImage,
+        priceUsd: product.priceUsd,
+        priceEur: product.priceEur,
+      },
+      qty,
+    );
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1800);
+  };
 
   return (
     <motion.article
@@ -207,47 +222,38 @@ function ProductCard({
         <h3 className="mt-2 font-display text-2xl leading-tight">{product.name}</h3>
         <p className="mt-3 text-sm text-muted-foreground line-clamp-2">{product.description}</p>
 
-        <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          EAN <span className="text-ink/80 tabular-nums">{product.ean}</span>
-        </p>
+        <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span>EAN <span className="text-ink/80 tabular-nums">{product.ean}</span></span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-bone px-2 py-0.5 text-[9px] text-ink/70">Bulk supply ready</span>
+        </div>
 
         <div className="mt-3 flex items-baseline justify-between border-t border-black/10 pt-4">
           <div>
             <p className="font-display text-3xl leading-none">${product.priceUsd.toFixed(2)}</p>
-            <p className="mt-1 text-sm text-muted-foreground">€{product.priceEur.toFixed(2)} · per unit</p>
+            <p className="mt-1 text-sm text-muted-foreground">€{product.priceEur.toFixed(2)} · per unit (indicative)</p>
           </div>
           <p className="text-xs text-muted-foreground">{product.size}</p>
         </div>
 
         <div className="mt-5 flex items-center gap-3">
           <div className="inline-flex items-center rounded-full border border-black/10 bg-bone">
-            <button
-              type="button"
-              aria-label="Decrease"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              className="grid h-9 w-9 place-items-center rounded-full hover:bg-ink/5"
-            >
+            <button type="button" aria-label="Decrease" onClick={() => setQty((q) => Math.max(1, q - 10))} className="grid h-9 w-9 place-items-center rounded-full hover:bg-ink/5">
               <Minus className="h-3.5 w-3.5" />
             </button>
-            <span className="w-8 text-center text-sm font-medium tabular-nums">{qty}</span>
-            <button
-              type="button"
-              aria-label="Increase"
-              onClick={() => setQty((q) => Math.min(9999, q + 1))}
-              className="grid h-9 w-9 place-items-center rounded-full hover:bg-ink/5"
-            >
+            <span className="w-12 text-center text-sm font-medium tabular-nums">{qty}</span>
+            <button type="button" aria-label="Increase" onClick={() => setQty((q) => Math.min(99999, q + 10))} className="grid h-9 w-9 place-items-center rounded-full hover:bg-ink/5">
               <Plus className="h-3.5 w-3.5" />
             </button>
           </div>
           <button
             type="button"
-            onClick={() => onSubmit(qty)}
+            onClick={handleAdd}
             className="group/btn inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ink/85"
           >
-            Submit Order
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
+            {added ? (<>Added <Check className="h-4 w-4" /></>) : (<>Add to Bulk Inquiry <ArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" /></>)}
           </button>
         </div>
+        <p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Units · contributes to {MOQ_TOTAL}-unit MOQ</p>
       </div>
     </motion.article>
   );
