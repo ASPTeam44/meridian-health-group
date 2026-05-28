@@ -107,11 +107,7 @@ function BrandPage() {
           <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {brand.products.map((p, i) => (
               <Reveal key={p.sku} delay={(i % 3) * 0.07}>
-                <ProductCard
-                  brand={brand}
-                  product={p}
-                  onSubmit={(qty) => setActive({ product: p, qty })}
-                />
+                <ProductCard brand={brand} product={p} />
               </Reveal>
             ))}
           </div>
