@@ -18,7 +18,6 @@ export const Route = createFileRoute("/brands/$slug")({
 
 function BrandPage() {
   const { brand } = Route.useLoaderData() as { brand: Brand };
-  const [active, setActive] = useState<{ product: Product; qty: number } | null>(null);
   const siblings = brandsByCategory(brand.category).filter((b) => b.slug !== brand.slug);
   const related = (siblings.length ? siblings : BRANDS.filter((b) => b.slug !== brand.slug)).slice(0, 4);
 
