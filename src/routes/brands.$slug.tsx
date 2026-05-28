@@ -159,15 +159,6 @@ function BrandPage() {
         </div>
       </section>
 
-      {active && (
-        <InquiryDialog
-          open={!!active}
-          onClose={() => setActive(null)}
-          brand={brand}
-          product={active.product}
-          quantity={active.qty}
-        />
-      )}
     </>
   );
 }
