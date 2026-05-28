@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Boxes } from "lucide-react";
 import { BRANDS } from "@/lib/brands";
+import { useCart, MOQ_TOTAL } from "@/lib/cart";
 
 const NAV = [
   { label: "About", to: "/about" },
@@ -16,6 +17,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalUnits, setOpen: setCartOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -58,15 +60,33 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 lg:flex">
+          <button
+            onClick={() => setCartOpen(true)}
+            className="relative inline-flex items-center gap-2 rounded-full border border-ink/15 px-3.5 py-2 text-sm font-medium text-ink/80 transition-colors hover:border-ink/40 hover:text-ink"
+            aria-label="Open bulk inquiry"
+          >
+            <Boxes className="h-4 w-4" />
+            <span className="tabular-nums">{totalUnits}</span>
+            <span className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">/{MOQ_TOTAL} MOQ</span>
+          </button>
           <Link
-            to="/contact"
+            to="/checkout"
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-ink/85"
           >
-            Request a quote
+            Request bulk quote
             <ArrowUpRight className="h-4 w-4 hover-arrow" />
           </Link>
         </div>
+
+        <button
+          onClick={() => setCartOpen(true)}
+          aria-label="Open bulk inquiry"
+          className="relative mr-2 inline-flex items-center gap-1.5 rounded-full border border-ink/15 px-3 py-1.5 text-xs lg:hidden"
+        >
+          <Boxes className="h-3.5 w-3.5" />
+          <span className="tabular-nums">{totalUnits}/{MOQ_TOTAL}</span>
+        </button>
 
         <button
           aria-label="Open menu"
